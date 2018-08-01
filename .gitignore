@@ -1,0 +1,4 @@
+packer_cache
+output-virtualbox-iso
+piece-playbook.retry
+piece.img

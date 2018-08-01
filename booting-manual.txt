@@ -1,0 +1,54 @@
+QED PIECE booting manual
+========================
+
+
+0. How PIECE works
+------------------
+PIECE is a bootable USB pendrive. It contains a full operating system.
+
+
+1. Booting on PC
+----------------
+- Plug PIECE in
+- Enter your computer's BIOS. To enter BIOS press <F2>, <F12>, <ESC> or <DELETE>
+  when the manufacturer's logo shows up, right after power-on.
+  Look for text similar to "Press X to enter setup" on the screen
+- For modern PCs ensure that Secure Boot option is disabled in bios
+- For computers with USB3.0 ensure that XHCI setting is enabled.
+  Sometimes called XHCI Pre-Boot Mode or XHCI Hand-off
+- Find boot order settings and ensure that USB drive option is on top of the list
+- Save and reboot
+- Your computer should now boot PIECE correctly
+
+
+2. Booting on Mac
+-----------------
+- Plug PIECE in
+- Right after the booting chime press and hold the Option key
+- Release the Option key when a list of boot options is shown
+- Select the USB drive from the list and press enter
+- Your computer should now boot PIECE correctly
+
+
+3. Booting in VirtualBox
+------------------------
+- Plug PIECE-VM in (PIECE-VM is a different pendrive setup!)
+- Install VirtualBox on your computer
+- Enable virtualization options in the BIOS if necessary
+- Open VirtualBox
+- Select File -> Import Appliance
+- Find the .ovf file located on the pendrive
+- Open settings of the imported VM and increase Base Memory
+- Start the VM
+- Optionally, make the VM display full-screen
+- You now have PIECE running in a VM
+
+4. Troubleshooting
+------------------
+- Q: How to boot PIECE on a Chromebook
+  A: Chromebooks do not support booting from USB. Use the VirtualBox method
+
+- Q: I have an Nvidia GPU and I can only see a black screen/terminal login after boot
+  A: After booting, when a countdown is shown in the upper left corer of the screen press <ESC>.
+     This opens the GRUB menu. Navigate to the second option called "Ubuntu Nvidia GTX 8XX, 9XX workaround"
+     and press enter.

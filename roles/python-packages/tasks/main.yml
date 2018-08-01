@@ -1,0 +1,31 @@
+- name: create venv and install packages
+  pip:
+    virtualenv: "{{ user_home }}/venv"
+    virtualenv_command: "/usr/bin/python3 -m venv --system-site-packages"
+    name:
+      - django
+      - numpy
+      - pandas
+      - tqdm
+      - brukeropusreader
+      - folium
+      - shapely
+      - pyshp
+      - pyproj
+      - rasterio
+      - seaborn
+      - matplotlib
+      - tensorflow
+      - scikit-learn
+      - scikit-image
+      - ipython
+      - jupyter
+      - keras
+
+- name: chown venv for student
+  file:
+    path: "{{ user_home }}/venv"
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+    recurse: yes
+    state: directory

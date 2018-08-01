@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Guake
+Comment=Guake console
+Exec=guake
+StartupNotify=false
+Terminal=false
+Hidden=false

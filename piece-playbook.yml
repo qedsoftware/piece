@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  remote_user: student
+  roles:
+    - os-packages
+    - configuration
+    - python-packages
+    - documentation
+  vars:
+    new_user_name: student
+    user_home: "/home/{{ new_user_name }}"
+    doc_dir: "/home/{{ new_user_name }}/Desktop/docs"

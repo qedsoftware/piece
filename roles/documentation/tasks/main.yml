@@ -1,0 +1,56 @@
+- name: Create documentation directory
+  file:
+    path: "{{ doc_dir }}"
+    state: directory
+
+- name: Download Python manual
+  get_url:
+    url: "https://docs.python.org/3.6/archives/python-3.6.6-docs-pdf-letter.zip"
+    dest: "{{ doc_dir }}"
+
+- name: Unpack Python manual
+  unarchive:
+    src: "{{ doc_dir }}/python-3.6.6-docs-pdf-letter.zip"
+    dest: "{{ doc_dir }}"
+    remote_src: yes
+
+- name: Delete Zipped Python manual
+  file:
+    path: "{{ doc_dir }}/python-3.6.6-docs-pdf-letter.zip"
+    state: absent
+
+- name: Rename Python manual directory
+  command: "mv {{ doc_dir }}/docs-pdf {{ doc_dir }}/python"
+
+- name: Download Django documentation
+  get_url:
+    url: "https://media.readthedocs.org/pdf/django/2.0.x/django.pdf"
+    dest: "{{ doc_dir }}"
+
+- name: Download Pandas documentation
+  get_url:
+    url: "http://pandas.pydata.org/pandas-docs/stable/pandas.pdf"
+    dest: "{{ doc_dir }}"
+
+- name: Download numpy user guide
+  get_url:
+    url: "https://docs.scipy.org/doc/numpy/numpy-user-1.15.0.pdf"
+    dest: "{{ doc_dir }}"
+
+- name: Download numpy reference guide
+  get_url:
+    url: "https://docs.scipy.org/doc/numpy/numpy-ref-1.15.0.pdf"
+    dest: "{{ doc_dir }}"
+
+- name: Download scikit-learn documentation
+  get_url:
+    url: "http://scikit-learn.org/stable/_downloads/scikit-learn-docs.pdf"
+    dest: "{{ doc_dir }}"
+
+- name: Chown documentation directory and contents for student
+  file:
+    path: "{{ doc_dir }}"
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+    recurse: yes
+    state: directory

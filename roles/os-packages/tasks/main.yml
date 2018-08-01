@@ -1,0 +1,51 @@
+- name: Update cache
+  apt:
+    update_cache: yes
+
+- name: Update packages
+  apt:
+    upgrade: safe
+
+- name: Install OS packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - snapd
+      - aptitude
+      - vim
+      - tree
+      - mc
+      - git
+      - git-review
+      - gitk
+      - python3
+      - python3-pip
+      - python3-venv
+      - libreoffice
+      - keepassx
+      - gimp
+      - guake
+      - libutempter0  # Fixes guake 3.0.5 issue
+      - nodejs
+      - npm
+      - xserver-xorg-input-synaptics
+      - xserver-xorg-video-vesa
+      - xserver-xorg-video-ati
+      - xserver-xorg-video-intel
+      - xserver-xorg-video-nouveau
+      - python3-gdal
+      - gdal-bin
+      - tig
+      - tmux
+
+- name: install pycharm from snap
+  command: snap install pycharm-community --classic
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes

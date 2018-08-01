@@ -1,0 +1,47 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
+      "keep_registered": false,
+      "skip_export": false,
+      "headless": true,
+      "iso_url": "http://cdimage.ubuntu.com/lubuntu/releases/18.04/release/lubuntu-18.04-alternate-amd64.iso",
+      "iso_checksum": "aaa52d2c501a689efeca1ebb3a7fdb2fa9e1c215c40f4a9fe7ea110bc3509670",
+      "iso_checksum_type": "sha256",
+      "guest_additions_mode": "disable",
+      "vm_name": "qed-piece",
+      "disk_size": 10000,
+      "http_directory": "http",
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "fb=false debconf/frontend=noninteractive ",
+        "hostname=qed-piece ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "ssh_timeout": "2h",
+      "ssh_username": "student",
+      "ssh_password": "student",
+      "shutdown_command": "echo 'student' | sudo -S shutdown -P now",
+      "post_shutdown_delay": "30s",
+      "export_opts": [
+        "--manifest",
+        "--vsys", "0",
+        "--product", "PIECE",
+        "--vendor", "QED",
+        "--vendorurl", "https://qed.ai/",
+        "--description", "Portable Integrated Environment for Computing Education"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./piece-playbook.yml"
+    }
+  ]
+}

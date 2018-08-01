@@ -1,0 +1,84 @@
+- name: setup gitkurwa
+  copy:
+    src: "gitconfig"
+    dest: "{{ user_home }}/.gitconfig"
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+
+- name: setup .bashrc
+  lineinfile:
+    path: "{{ user_home }}/.bashrc"
+    line: ". ~/.bash_custom"
+
+- name: setup .bash_custom
+  copy:
+    src: "bash_custom"
+    dest: "{{ user_home }}/.bash_custom"
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+
+- name: create autostart directory
+  file:
+    path: "{{ user_home }}/.config/autostart"
+    state: directory
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+
+- name: create Guake autostart file
+  copy:
+    src: "Guake.desktop"
+    dest: "{{ user_home }}/.config/autostart/Guake.desktop"
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+
+- name: create Desktop directory
+  file:
+    path: "{{ user_home }}/Desktop"
+    state: directory
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+
+- name: create README.txt
+  template:
+    src: README.txt.j2
+    dest: "{{ user_home }}/Desktop/README.txt"
+    owner: "{{ new_user_name }}"
+    group: "{{ new_user_name }}"
+
+- name: create /usr/share/qed
+  file:
+    path: "/usr/share/qed"
+    state: directory
+
+- name: copy QED wallpaper
+  copy:
+    src: qed-wallpaper.png
+    dest: "/usr/share/qed/qed-wallpaper.png"
+
+- name: set QED wallpaper as default
+  file:
+    path: "/usr/share/lubuntu/wallpapers/lubuntu-default-wallpaper.png"
+    state: link
+    src: "/usr/share/qed/qed-wallpaper.png"
+
+- name: do not hide the GRUB menu
+  command: sed -i -e "s/^GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=countdown/" /etc/default/grub
+
+# Extra GRUB entries for newer Nvidia GPUs
+# since nouveau doesn't work well with GTX8XX and GTX9XX
+- name: use customized GRUB config
+  copy:
+    src: "grub_10_linux"
+    dest: "/etc/grub.d/10_linux"
+
+# make GRUB remember the last choice
+- name: set GRUB default to saved
+  command: sed -i -e "s/^GRUB_DEFAULT=0/GRUB_DEFAULT=saved/" /etc/default/grub
+
+- name: save last used boot option as default
+  lineinfile:
+    path: "/etc/default/grub"
+    line: "GRUB_SAVEDEFAULT=true"
+
+- name: update GRUB
+  command: update-grub
