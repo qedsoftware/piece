@@ -11,3 +11,4 @@
     new_user_name: student
     user_home: "/home/{{ new_user_name }}"
     doc_dir: "/home/{{ new_user_name }}/Desktop/docs"
+    piece_version: 2

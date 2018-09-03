@@ -30,7 +30,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 sudo bash <<EOF
 echo "Writing disk image"
-dd if=./piece.img of=${DRIVE_PATH} status=progress conv=fsync
+dd if=./piece.img of=${DRIVE_PATH} status=progress bs=4M conv=fsync
 parted ${DRIVE_PATH} name 1 PIECE
 echo "Resizing partition"
 parted ${DRIVE_PATH} resizepart 1 100%

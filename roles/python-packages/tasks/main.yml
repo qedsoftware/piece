@@ -21,6 +21,7 @@
       - ipython
       - jupyter
       - keras
+      - xlrd
 
 - name: chown venv for student
   file:

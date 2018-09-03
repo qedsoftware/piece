@@ -38,12 +38,20 @@
     owner: "{{ new_user_name }}"
     group: "{{ new_user_name }}"
 
+- name: get devops repo commit hash
+  local_action: command git rev-parse --short HEAD
+  register: "local_git_hash"
+  become: false
+
 - name: create README.txt
   template:
     src: README.txt.j2
     dest: "{{ user_home }}/Desktop/README.txt"
     owner: "{{ new_user_name }}"
     group: "{{ new_user_name }}"
+  vars:
+    build_time: "{{ ansible_date_time.iso8601 }}"
+    build_hash: "{{ local_git_hash.stdout }}"
 
 - name: create /usr/share/qed
   file:

@@ -6,6 +6,9 @@
       "keep_registered": false,
       "skip_export": false,
       "headless": true,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "2048"]
+      ],
       "iso_url": "http://cdimage.ubuntu.com/lubuntu/releases/18.04/release/lubuntu-18.04-alternate-amd64.iso",
       "iso_checksum": "aaa52d2c501a689efeca1ebb3a7fdb2fa9e1c215c40f4a9fe7ea110bc3509670",
       "iso_checksum_type": "sha256",

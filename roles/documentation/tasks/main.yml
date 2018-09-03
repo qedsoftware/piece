@@ -34,12 +34,12 @@
 
 - name: Download numpy user guide
   get_url:
-    url: "https://docs.scipy.org/doc/numpy/numpy-user-1.15.0.pdf"
+    url: "https://docs.scipy.org/doc/numpy-1.15.1/numpy-user-1.15.1.pdf"
     dest: "{{ doc_dir }}"
 
 - name: Download numpy reference guide
   get_url:
-    url: "https://docs.scipy.org/doc/numpy/numpy-ref-1.15.0.pdf"
+    url: "https://docs.scipy.org/doc/numpy-1.15.1/numpy-ref-1.15.1.pdf"
     dest: "{{ doc_dir }}"
 
 - name: Download scikit-learn documentation
