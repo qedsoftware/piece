@@ -6,7 +6,7 @@ Portable Integrated Environment for Computing Education
 - linux machine
 - PIECE disk image
   - [download](https://github.com/qedsoftware/piece/releases/latest) the latest release
-  - or [build from source](#Building from source)
+  - or [build from source](#building-from-source)
 - USB flash drive
   - at least 16GB of space
   - support for USB 3.0 will speed up installation and the system
