@@ -41,7 +41,7 @@ Portable Integrated Environment for Computing Education
     
 
 ## Booting PIECE
-See [the booting manual](booting-manual.txt)
+See [the booting manual](booting_manual.md)
 
 ## Building from source
 ### Requirements
