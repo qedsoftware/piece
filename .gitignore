@@ -1,4 +1,17 @@
-packer_cache
+# Created by https://www.gitignore.io/api/packer,ansible
+# Edit at https://www.gitignore.io/?templates=packer,ansible
+
+### Ansible ###
+*.retry
+
+### Packer ###
+# Cache objects
+packer_cache/
+
+# For built boxes
+*.box
+
+# End of https://www.gitignore.io/api/packer,ansible
+
 output-virtualbox-iso
-piece-playbook.retry
 piece.img
