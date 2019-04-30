@@ -1,57 +1,74 @@
-# QED PIECE
+# PIECE
 
-PIECE = Portable Integrated Environment for Computing Education
-or
-PIECE = Portable InExpensive Computing Environment
-
+Portable Integrated Environment for Computing Education
 
 ## Requirements
+- linux machine
+- PIECE disk image
+  - [download](https://github.com/qedsoftware/piece/releases/latest) the latest release
+  - or [build from source](#Building from source)
+- USB flash drive
+  - at least 16GB of space
+  - support for USB 3.0 will speed up installation and the system
+
+## Installation
+1. Clone this repository
+
+        git clone https://github.com/qedsoftware/piece.git
+
+2. If you downloaded the file from github, unzip it and place it in the `piece` directory
+
+3. Connect the flash drive to the computer
+
+4. Find the flash drive device name. Example using `lsblk`:
+
+        $ lsblk
+        NAME          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+        sda             8:0    0 119,2G  0 disk  
+        ├─sda1          8:1    0   100M  0 part  
+        ├─sda2          8:2    0   200M  0 part  /boot
+        └─sda3          8:3    0 118,9G  0 part  
+        sdb             8:16   1  14,3G  0 disk  
+        └─sdb1          8:17   1  14,3G  0 part  
+    
+    In the example it's `/dev/sdb`
+
+5. Burn the image to the pendrive. In the `piece` directory run
+
+        ./burn_to_drive.sh DRIVE_NAME
+
+    For the example it would be `./burn_to_drive.sh /dev/sdb`
+    
+
+## Booting PIECE
+See [the booting manual](booting-manual.txt)
+
+## Building from source
+### Requirements
 - VirtualBox
 - Ansible
 - Packer.io
 - sshpass
 - Decent internet connection
-- 20GB free disk space
+- 20GB of disk space
 
 
-## Building the image
+### Building the image
 
     packer build piece.json
 
-
-## Extracting the drive image
+### Extracting the drive image
 
     ./extract_drive_image.sh
-
-
-## Burning the image to a pendrive
-Find the pendrive name:
-
-    $ lsblk
-    NAME          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
-    sda             8:0    0 119,2G  0 disk  
-    ├─sda1          8:1    0   100M  0 part  
-    ├─sda2          8:2    0    35G  0 part  
-    ├─sda3          8:3    0     1K  0 part  
-    ├─sda5          8:5    0     9G  0 part  
-    │ └─swap      254:1    0     9G  0 crypt [SWAP]
-    ├─sda6          8:6    0     3G  0 part  
-    ├─sda7          8:7    0   200M  0 part  /boot
-    └─sda8          8:8    0    72G  0 part  
-      └─cryptroot 254:0    0    72G  0 crypt /var
-    sdb             8:16   1  14,3G  0 disk  
-    └─sdb1          8:17   1  14,3G  0 part  
     
-In the example it's `/dev/sdb`
+This results in the `piece.img` file
 
-    ./burn_to_drive.sh DRIVE_NAME
-    
-For the example it would be `./burn_to_drive.sh /dev/sdb`
+You can now [install PIECE](#installation)
 
-
-## Making changes
+## Development
 ### Modifying OS installation parameters
-See `http/preseed.cfg`.
+See `http/preseed.cfg`
+
 Consult:
 
     https://help.ubuntu.com/lts/installation-guide/amd64/apbs02.html
@@ -60,3 +77,8 @@ and
 
     https://help.ubuntu.com/lts/installation-guide/amd64/apbs04.html
 
+## Licensing
+
+Copyright (c) 2019 Quantitative Engineering Design (https://qed.ai). All rights reserved.
+
+This software is distributed under The MIT License (MIT), which is included in LICENSE.
