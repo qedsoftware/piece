@@ -1,4 +1,5 @@
-- name: setup gitkurwa
+# https://github.com/jakubnabrdalik/gitkurwa
+- name: setup git shortcuts
   copy:
     src: "gitconfig"
     dest: "{{ user_home }}/.gitconfig"
