@@ -1,3 +1,13 @@
+- name: Add yarn signing key
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+
+- name: Add yarn repository
+  apt_repository:
+    repo: deb https://dl.yarnpkg.com/debian/ stable main
+    state: present
+
 - name: Update cache
   apt:
     update_cache: yes
@@ -19,6 +29,7 @@
       - git
       - git-review
       - gitk
+      - meld
       - python3
       - python3-pip
       - python3-venv
@@ -38,6 +49,11 @@
       - gdal-bin
       - tig
       - tmux
+
+- name: Install yarn, without system node
+  apt:
+    name: yarn
+    install_recommends: no
 
 - name: install pycharm from snap
   command: snap install pycharm-community --classic
