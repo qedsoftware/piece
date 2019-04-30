@@ -5,18 +5,18 @@
 
 - name: Download Python manual
   get_url:
-    url: "https://docs.python.org/3.6/archives/python-3.6.6-docs-pdf-letter.zip"
+    url: "https://docs.python.org/3.6/archives/python-3.6.8-docs-pdf-letter.zip"
     dest: "{{ doc_dir }}"
 
 - name: Unpack Python manual
   unarchive:
-    src: "{{ doc_dir }}/python-3.6.6-docs-pdf-letter.zip"
+    src: "{{ doc_dir }}/python-3.6.8-docs-pdf-letter.zip"
     dest: "{{ doc_dir }}"
     remote_src: yes
 
 - name: Delete Zipped Python manual
   file:
-    path: "{{ doc_dir }}/python-3.6.6-docs-pdf-letter.zip"
+    path: "{{ doc_dir }}/python-3.6.8-docs-pdf-letter.zip"
     state: absent
 
 - name: Rename Python manual directory
