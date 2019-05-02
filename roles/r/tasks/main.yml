@@ -8,6 +8,9 @@
   apt:
     name:
       - qt5-default
+      - libxml2-dev
+      - libcurl4-openssl-dev
+      - libssl-dev
 
 - name: download RStudio installer
   get_url:
@@ -39,4 +42,6 @@
     - dplyr
     - ggplot2
     - tidyr
+    - tidyverse
     - agridat
+
