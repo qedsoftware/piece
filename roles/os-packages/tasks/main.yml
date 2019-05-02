@@ -32,7 +32,7 @@
       - python3-pip
       - python3-venv
       - libreoffice
-      - keepassx
+      - keepassxc
       - gimp
       - guake
       - libutempter0  # Fixes guake 3.0.5 issue
