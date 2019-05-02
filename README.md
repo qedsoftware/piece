@@ -50,7 +50,7 @@ See [the booting manual](booting_manual.md)
 - Packer.io
 - sshpass
 - Decent internet connection
-- 20GB of disk space
+- 30GB of disk space
 
 
 ### Building the image

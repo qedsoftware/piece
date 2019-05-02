@@ -14,7 +14,7 @@
       "iso_checksum_type": "sha256",
       "guest_additions_mode": "disable",
       "vm_name": "qed-piece",
-      "disk_size": 10000,
+      "disk_size": 12000,
       "http_directory": "http",
       "boot_command": [
         "<esc><esc><enter><wait>",

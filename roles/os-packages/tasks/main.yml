@@ -18,9 +18,7 @@
 
 - name: Install OS packages
   apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
+    name:
       - snapd
       - aptitude
       - vim

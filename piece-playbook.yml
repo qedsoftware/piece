@@ -6,6 +6,7 @@
     - os-packages
     - configuration
     - python-packages
+    - r
     - documentation
   vars:
     new_user_name: student

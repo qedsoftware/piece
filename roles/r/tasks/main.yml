@@ -1,0 +1,42 @@
+- name: install R with OpenBLAS
+  apt:
+    name:
+      - libopenblas-base
+      - r-base
+
+- name: install RStudio dependencies
+  apt:
+    name:
+      - qt5-default
+
+- name: download RStudio installer
+  get_url:
+    dest: /tmp/r-studio.deb
+    url: https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.2.1335-amd64.deb
+    checksum: "md5:71a8d1990c0d97939804b46cfb0aea75"
+
+- name: install RStudio
+  apt:
+    deb: /tmp/r-studio.deb
+
+- name: clean up the RStudio installer
+  file:
+    path: /tmp/r-studio.deb
+    state: absent
+
+# using code from https://adamj.eu/tech/2014/07/19/installing-and-removing-r-packages-with-ansible/
+- name: install R packages
+  command: >
+    Rscript --slave --no-save --no-restore-history -e "if (! ('{{ item }}' %in% installed.packages()[,'Package'])) { install.packages(pkgs='{{ item }}', repos=c('https://cloud.r-project.org/')); print('Added'); } else { print('Already installed'); }"
+  register: r_result
+  until: "r_result.rc == 0 and 'had non-zero exit status' not in r_result.stderr"
+  retries: 5
+  delay: 10
+  changed_when: "'Added' in r_result.stdout"
+  with_items:
+    - Rcpp
+    - BH
+    - dplyr
+    - ggplot2
+    - tidyr
+    - agridat
